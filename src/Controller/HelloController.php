@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class HelloController
+
+class HelloController extends Controller
 {
 
     /**
@@ -20,5 +22,16 @@ class HelloController
             "<html><h1>Hello world</h1></html>"
         );
 
+    }
+
+    /**
+     * 
+     * @Route("mensagem")
+     */
+    public function mensagem(){
+        
+        return $this->render('mensagem/hello.html.twig', [
+            'mensagem' => 'Olá mundo!!! (teste)'
+        ]);
     }
 }
