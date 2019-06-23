@@ -2,7 +2,7 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
-hello-world:
-    path: /hello-world
-    controller: App\Controller\HelloController::hello
+#hello-world:
+#    path: /hello-world
+#    controller: App\Controller\HelloController::hello
 
