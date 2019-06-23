@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Produto;
 
 class ProdutoController extends AbstractController
 {
@@ -12,8 +13,12 @@ class ProdutoController extends AbstractController
      */
     public function index()
     {
+        $em = $this->getDoctrine()->getManager();
+
+        $produtos = $em->getRepository(Produto::class)->findAll();
+
         return $this->render('produto/index.html.twig', [
-            'controller_name' => 'ProdutoController',
+            'produtos' => $produtos,
         ]);
     }
 }
