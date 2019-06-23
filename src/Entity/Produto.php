@@ -29,6 +29,13 @@ class Produto
      */
     private $preco;
 
+    /**
+     * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     */
+    private $descricao;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -54,6 +61,18 @@ class Produto
     public function setPreco($preco): self
     {
         $this->preco = $preco;
+
+        return $this;
+    }
+
+    public function getDescricao()
+    {
+        return $this->descricao;
+    }
+
+    public function setDescricao($descricao): self
+    {
+        $this->descricao = $descricao;
 
         return $this;
     }
