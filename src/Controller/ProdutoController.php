@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProdutoController extends AbstractController
 {
     /**
-     * @Route("/produto", name="produto")
+     * @Route("/produto", name="listar_produto")
      */
     public function index()
     {
@@ -35,6 +35,18 @@ class ProdutoController extends AbstractController
         $form = $this->createForm(ProdutoType::class, $produto);
 
         $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($produto);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->set('success', 'Produto cadastrado com sucesso!');
+
+            return $this->redirectToRoute('listar_produto');
+        }
 
         return $this->render('produto/create.html.twig', [
             'form' => $form->createView()

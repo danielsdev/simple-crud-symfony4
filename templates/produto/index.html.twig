@@ -4,6 +4,14 @@
 
 {% block body %}
 
+    {% for flashMessage in app.session.flashbag.get('success') %}
+
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+        
+    {% endfor %}
+
     <h1>Listagem de produto</h1>
     <hr>
 
