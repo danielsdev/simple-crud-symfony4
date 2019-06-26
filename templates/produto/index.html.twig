@@ -12,11 +12,19 @@
         
     {% endfor %}
 
+    {% for flashMessage in app.session.flashbag.get('warning') %}
+
+        <div class="alert alert-warning">
+            {{ flashMessage }}
+        </div>
+        
+    {% endfor %}
+
     <h1>Listagem de produto</h1>
     <hr>
 
     <div class="col-md-12">
-        <a class="btn btn-lg btn-primary float-right" href="">Adicionar produto</a>
+        <a class="btn btn-lg btn-primary float-right" href="{{ path('cadastrar_produto') }}">Adicionar produto</a>
     </div> 
 
     <table class="table table-striped table-hover mt-5">
@@ -37,9 +45,9 @@
                     <td>{{ produto.nome }}</td>
                     <td>{{ produto.preco }}</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href=""><i class="fas fa-eye"></i></a>
-                        <a class="btn btn-sm btn-warning" href=""><i class="fas fa-pencil-alt"></i></a>
-                        <a class="btn btn-sm btn-danger" href=""><i class="fas fa-trash"></i></a>
+                        <a class="btn btn-sm btn-primary" href="{{ path('visualizar_produto', {'id': produto.id}) }}"><i class="fas fa-eye"></i></a>
+                        <a class="btn btn-sm btn-warning" href="{{ path('editar_produto', {'id': produto.id}) }}"><i class="fas fa-pencil-alt"></i></a>
+                        <a class="btn btn-sm btn-danger btn-delete-product" href="{{ path('apagar_produto', {'id': produto.id}) }}"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 
@@ -48,5 +56,20 @@
         </tbody>
 
     </table>
+
+    <script>
+        $(document).ready(function(){
+            $('.btn-delete-product').click(function(e){
+                
+                e.preventDefault();
+                var url = $(this).prop('href');
+
+                if(confirm('Tem certeza que deseja excluir esse produto?')){
+
+                    window.location = url;
+                }
+            })
+        });
+    </script>
 
 {% endblock %}
