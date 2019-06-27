@@ -18,8 +18,12 @@
             <td>{{ produto.nome }}</td>
         </tr>
         <tr>
+            <th>Preço</th>
+            <td>R$ {{ produto.preco | number_format(2, ",", ".") }}</td>
+        </tr>
+        <tr>
             <th>Descrição</th>
-            <td>{{ produto.descricao }}</td>
+            <td>{{ produto.descricao | nl2br}}</td>
         </tr>
     </tbody>
 </table>
